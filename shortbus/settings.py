@@ -85,6 +85,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'django_messages',
     'djangobb_forum',
     'haystack',
