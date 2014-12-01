@@ -3,3 +3,4 @@ db.sqlite3
 secret
 djangobb_index/
 shortbus/static/
+shortbus/media/
