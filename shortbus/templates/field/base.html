@@ -1,0 +1,33 @@
+{% load forum_extras %}
+{% load i18n %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>{{ forum_settings.FORUM_BASE_TITLE }} {% block title %}{% endblock %}</title>
+	<meta name="description" content="{{ forum_settings.FORUM_META_DESCRIPTION }} " />
+	<meta name="keywords" content="{{ forum_settings.FORUM_META_KEYWORDS }}" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	
+	{% set_theme_style request.user %}
+	<link rel="shortcut icon" href="{{ STATIC_URL }}djangobb_forum/favicon.png" type="image/png" />
+
+	{% block extra_meta %}{% endblock %}
+</head>
+<body>
+    {% include 'shortbus.home/subheader.html' %}
+
+	{% block content %}{% endblock %}
+	<div id="brdfooter" class="block">
+	<h2><span>{% trans "Board footer" %}</span></h2>
+        <div class="box">
+            <div class="inbox">
+                	Footer!
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

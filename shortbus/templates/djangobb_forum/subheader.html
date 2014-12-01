@@ -1,0 +1,18 @@
+{% extends 'header.html' %}
+{% load i18n %}
+
+        {% block subheader %}
+		<div id="brdmenu" class="inbox">
+			<ul>
+			{% block menu %}
+				{% if user.is_authenticated %}
+				<li id="navprofile"><a href="{% url 'djangobb:forum_profile' request.user %}">{% trans "Profile" %}</a></li>
+				{% endif %}		
+				<li id="navuserlist"><a href="{% url 'djangobb:forum_users' %}">{% trans "User list" %}</a></li>
+				<li id="navsearch"><a href="{% url 'djangobb:search' %}">{% trans "Search" %}</a></li>				
+			{% endblock %}
+			</ul>
+		</div>
+		<div class="clearer"></div>
+		{% endblock %}
+

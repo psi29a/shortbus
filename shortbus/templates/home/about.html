@@ -1,0 +1,17 @@
+{% extends 'home/base.html' %}
+{% load forum_extras %}
+{% load i18n %}
+
+{% block content %}
+<div id="idx1" class="blocktable">
+About page!
+</div>
+{% endblock %}
+
+{% block lofi %}
+{% if forum_settings.LOFI_SUPPORT %}
+    <p class="lofi">
+        <a href="{% url 'djangobb:lofi_index' %}">Lo-Fi Version</a>
+    </p>
+{% endif %}
+{% endblock %}
