@@ -21,11 +21,7 @@ MEDIA_URL = '/media/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = '399ha3=@sot%=k+dw8=6cpjcsjtwidk$#v+hz#&s5c$r_8+c7@'
-
 # Make this unique, and don't share it with anybody.
-
 if not hasattr(globals(), 'SECRET_KEY'):
     SECRET_FILE = os.path.join(BASE_DIR, 'secret')
     try:
