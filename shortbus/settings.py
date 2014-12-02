@@ -70,13 +70,26 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
-    'django_authopenid.context_processors.authopenid',
     'django_messages.context_processors.inbox',
     'djangobb_forum.context_processors.forum_settings',
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount",
+)
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
 )
 
 # Application definition
 INSTALLED_APPS = (
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -89,8 +102,6 @@ INSTALLED_APPS = (
     'django_messages',
     'djangobb_forum',
     'haystack',
-    'registration',
-    'django_authopenid',
     'linaro_django_pagination',
     'shortbus.home',
     'shortbus.field',
@@ -107,7 +118,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
-    'django_authopenid.middleware.OpenIDMiddleware',
     'djangobb_forum.middleware.LastLoginMiddleware',
     'djangobb_forum.middleware.UsersOnline',
     'djangobb_forum.middleware.TimezoneMiddleware',
@@ -199,7 +209,7 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 # Account settings
 ACCOUNT_ACTIVATION_DAYS = 10
 LOGIN_REDIRECT_URL = '/forum/'
-LOGIN_URL = '/account/signin/'
+LOGIN_URL = '/accounts/login/'
 
 try:
     import mailer

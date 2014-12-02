@@ -35,13 +35,13 @@
 					    </a>
 					</li>
 					{% endif %}
-					<li id="navlogout"><a href="{% url 'user_signout' %}?next={{ request.path }}">{% trans "Log out" %}</a></li>
+					<li id="navlogout"><a href="{% url 'account_logout' %}?next={{ request.path }}">{% trans "Log out" %}</a></li>
 			        {% if user.is_superuser %}
 				    <li id="navadmin"><a href="{% url 'admin:index' %}">{% trans "Administration" %}</a></li>
 			        {% endif %}					
 				{% else %}
-                    <li><a href="{% url 'user_signin' %}">{% trans "Log in" %}</a></li>
-					<li><a href="{% url 'registration_register' %}">{% trans "Sign up" %}</a></li>
+                    <li><a href="{% url 'account_login' %}">{% trans "Log in" %}</a></li>
+					<li><a href="{% url 'account_signup' %}">{% trans "Sign up" %}</a></li>
 				{% endif %}
 			</ul>				
 		</div>

@@ -2,18 +2,10 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 
-from django_authopenid.urls import urlpatterns as authopenid_urlpatterns
-from registration.forms import RegistrationFormUniqueEmail
-
 from djangobb_forum import settings as forum_settings
 from sitemap import SitemapForum, SitemapTopic
 
 from shortbus.home import views
-
-for i, rurl in enumerate(authopenid_urlpatterns):
-    if rurl.name == 'registration_register':
-        authopenid_urlpatterns[i].default_args.update({'form_class': RegistrationFormUniqueEmail})
-        break
 
 admin.autodiscover()
 
@@ -37,7 +29,7 @@ urlpatterns = patterns('',
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 
     # Apps
-    (r'^account/', include('django_authopenid.urls')),
+    (r'^accounts/', include('allauth.urls')),
     (r'^forum/', include('djangobb_forum.urls', namespace='djangobb')),
     
 )
