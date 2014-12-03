@@ -63,17 +63,17 @@ TEMPLATE_LOADERS = (
 FORCE_SCRIPT_NAME = ''
 
 TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'django.core.context_processors.static',
-    'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
     'django_messages.context_processors.inbox',
     'djangobb_forum.context_processors.forum_settings',
-    "allauth.account.context_processors.account",
-    "allauth.socialaccount.context_processors.socialaccount",
+    'allauth.account.context_processors.account',
+    'allauth.socialaccount.context_processors.socialaccount',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -89,7 +89,7 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
+#    'allauth.socialaccount.providers.facebook',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -105,6 +105,7 @@ INSTALLED_APPS = (
     'linaro_django_pagination',
     'shortbus.home',
     'shortbus.field',
+    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -115,8 +116,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
+#    'django.middleware.cache.FetchFromCacheMiddleware',
+#    'django.middleware.cache.UpdateCacheMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
     'djangobb_forum.middleware.LastLoginMiddleware',
     'djangobb_forum.middleware.UsersOnline',
@@ -206,20 +208,31 @@ HAYSTACK_CONNECTIONS = {
 }
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
-# Account settings
-ACCOUNT_ACTIVATION_DAYS = 10
-LOGIN_REDIRECT_URL = '/forum/'
-LOGIN_URL = '/accounts/login/'
+# auth and allauth settings
+LOGIN_REDIRECT_URL = '/'
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'SCOPE': ['email', 'publish_stream'],
+        'METHOD': 'js_sdk'  # instead of 'oauth2'
+    }
+}
 
-try:
-    import mailer
-    INSTALLED_APPS += ('mailer',)
-    EMAIL_BACKEND = "mailer.backend.DbBackend"
-except ImportError:
-    pass
+
+# Account settings
+#ACCOUNT_ACTIVATION_DAYS = 10
+#LOGIN_REDIRECT_URL = '/forum/'
+#LOGIN_URL = '/accounts/login/'
+
+#try:
+#    import mailer
+#    INSTALLED_APPS += ('mailer',)
+#    EMAIL_BACKEND = "mailer.backend.DbBackend"
+#except ImportError:
+#    pass
 
 #Cache settings
-CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
+#CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
 try:
     from local_settings import *

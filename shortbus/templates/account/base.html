@@ -1,6 +1,5 @@
 {% load forum_extras %}
 {% load i18n %}
-{% load url from future %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -16,17 +15,15 @@
 	{% block extra_meta %}{% endblock %}
 </head>
 <body>
-    {% include 'home/subheader.html' %}
+    {% include 'header.html' %}
 
-    <div id="announce" class="block">
     <div class="blockform">
-        {% block content %}
-        {% endblock %}
-        {% block extra_body %}
-        {% endblock %}
-        </div>
-    </div>
-    </div>
+    <h2><span>Authentication</span></h2>
+    <div class="box">
+	{% block content %}{% endblock %}
+	</div>
+	</div>
+	
 	<div id="brdfooter" class="block">
 	<h2><span>{% trans "Board footer" %}</span></h2>
         <div class="box">
