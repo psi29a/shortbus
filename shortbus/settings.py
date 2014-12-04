@@ -156,10 +156,10 @@ USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = (
+    ('en', 'English'),
     ('ca', 'Catalan'),
     ('cs', 'Czech'),
     ('de', 'German'),
-    ('en', 'English'),
     ('es', 'Spanish'),
     ('fo', 'Faroese'),
     ('fr', 'France'),
