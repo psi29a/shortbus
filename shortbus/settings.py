@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
@@ -30,13 +31,15 @@ if not hasattr(globals(), 'SECRET_KEY'):
         try:
             from random import choice
             import string
+
             symbols = ''.join((string.lowercase, string.digits, string.punctuation ))
             SECRET_KEY = ''.join([choice(symbols) for i in range(50)])
             secret = file(SECRET_FILE, 'w')
             secret.write(SECRET_KEY)
             secret.close()
         except IOError:
-            raise Exception('Please create a %s file with random characters to generate your secret key!' % SECRET_FILE)
+            raise Exception(
+                'Please create a %s file with random characters to generate your secret key!' % SECRET_FILE)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -89,7 +92,7 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-#    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.openid',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -116,8 +119,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-#    'django.middleware.cache.FetchFromCacheMiddleware',
-#    'django.middleware.cache.UpdateCacheMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'djangobb_forum.middleware.LastLoginMiddleware',
     'djangobb_forum.middleware.UsersOnline',
@@ -185,8 +186,8 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT,'openid/static'),
-    os.path.join(PROJECT_ROOT,'djangobb_forum/static'),
+    os.path.join(PROJECT_ROOT, 'openid/static'),
+    os.path.join(PROJECT_ROOT, 'djangobb_forum/static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -194,7 +195,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Haystack settings
@@ -210,28 +210,18 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 # auth and allauth settings
 LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_QUERY_EMAIL = True
-SOCIALACCOUNT_PROVIDERS = {
-    'facebook': {
-        'SCOPE': ['email', 'publish_stream'],
-        'METHOD': 'js_sdk'  # instead of 'oauth2'
-    }
-}
-
-
-# Account settings
-#ACCOUNT_ACTIVATION_DAYS = 10
-#LOGIN_REDIRECT_URL = '/forum/'
-#LOGIN_URL = '/accounts/login/'
-
-#try:
-#    import mailer
-#    INSTALLED_APPS += ('mailer',)
-#    EMAIL_BACKEND = "mailer.backend.DbBackend"
-#except ImportError:
-#    pass
-
-#Cache settings
-#CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
+SOCIALACCOUNT_PROVIDERS = \
+    {'openid':
+         {'SERVERS':
+              [dict(id='yahoo',
+                    name='Yahoo',
+                    openid_url='http://me.yahoo.com'),
+               dict(id='hyves',
+                    name='Hyves',
+                    openid_url='http://hyves.nl'),
+               dict(id='google',
+                    name='Google',
+                    openid_url='https://www.google.com/accounts/o8/id')]}}
 
 try:
     from local_settings import *
