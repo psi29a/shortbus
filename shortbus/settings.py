@@ -119,7 +119,6 @@ MIDDLEWARE_CLASSES = (
 #    'django.middleware.cache.FetchFromCacheMiddleware',
 #    'django.middleware.cache.UpdateCacheMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'django.middleware.transaction.TransactionMiddleware',
     'djangobb_forum.middleware.LastLoginMiddleware',
     'djangobb_forum.middleware.UsersOnline',
     'djangobb_forum.middleware.TimezoneMiddleware',
