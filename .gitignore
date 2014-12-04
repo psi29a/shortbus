@@ -1,6 +1,13 @@
+# Files
 *.pyc
 db.sqlite3
 secret
 djangobb_index/
 shortbus/static/
 shortbus/media/
+
+# IDEs
+.idea/
+
+# Environments
+venv
