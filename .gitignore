@@ -3,6 +3,7 @@
 db.sqlite3
 secret
 djangobb_index/
+djangobb_forum/avatars/
 shortbus/static/
 shortbus/media/
 
