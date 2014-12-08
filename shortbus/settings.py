@@ -210,17 +210,13 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_PROVIDERS = \
-    {'openid':
-         {'SERVERS':
-              [dict(id='yahoo',
-                    name='Yahoo',
-                    openid_url='http://me.yahoo.com'),
-               dict(id='hyves',
-                    name='Hyves',
-                    openid_url='http://hyves.nl'),
-               dict(id='google',
-                    name='Google',
-                    openid_url='https://www.google.com/accounts/o8/id')]}}
+    {'openid': {'SERVERS': [dict(id='yahoo',
+                            name='Yahoo',
+                            openid_url='http://me.yahoo.com'),
+                            dict(id='google',
+                            name='Google',
+                            openid_url='https://www.google.com/accounts/o8/id'),
+                            ]}}
 
 try:
     from local_settings import *
